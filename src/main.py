@@ -113,7 +113,8 @@ def main():
         print("\033[94m3. \033[0mStart clicker")
         print("\033[94m4. \033[0mReset config")
         print("\033[94m5. \033[0mShow all bindings")
-        print("\033[91m6. \033[0mExit") 
+        print("\033[91m6. \033[0mExit")
+        print("\033[93mTip: Press i+s+c at any time to return to menu\033[0m")
 
         choice = input("Choose option: ").strip()
 

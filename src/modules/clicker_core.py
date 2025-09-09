@@ -65,7 +65,7 @@ class Clicker:
                 elapsed = time.perf_counter() - start_click
                 time.sleep(max(0.0, delay - elapsed))
 
-            if self.config["BURST_PAUSE"] > 0:
+            if self.config["BURST_PAUSE"] > 0: 
                 time.sleep(self.config["BURST_PAUSE"])
 
             if self.current_clicks >= self.current_target_cps * 2:
@@ -75,8 +75,9 @@ class Clicker:
     def start(self):
         if not self.is_active:
             self.is_active = True
-            self.click_thread = threading.Thread(target=self.click_loop, daemon=True)
-            self.click_thread.start()
+            if self.click_thread is None or not self.click_thread.is_alive():
+                self.click_thread = threading.Thread(target=self.click_loop, daemon=True)
+                self.click_thread.start()
             print(f"[{self.config['TOGGLE_INPUT']}] Started")
 
     def stop(self):
