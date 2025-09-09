@@ -1,11 +1,12 @@
-#!/bin/bash
-# Start AutoClicker on Linux
+@echo off
+REM Start AutoClicker on Windows
 
-# Change to src directory relative to this script
-cd "$(dirname "$0")/src" || exit
+REM Change directory to src relative to this batch file
+cd /d "%~dp0\src"
 
-echo "Starting AutoClicker..."
-python3 main.py
+echo Starting AutoClicker...
+py main.py
 
-# Keep terminal open after script ends
-read -p "Press [Enter] to exit..."
+echo.
+echo Press any key to exit...
+pause >nul

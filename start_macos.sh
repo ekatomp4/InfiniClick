@@ -7,5 +7,5 @@ cd "$(dirname "$0")/src" || exit
 echo "Starting AutoClicker..."
 python3 main.py
 
-# Keep terminal open after script ends
+echo
 read -p "Press [Enter] to exit..."
