@@ -54,11 +54,12 @@ class Clicker:
             self.jitter_mouse()
 
             # Burst clicks
+            # Burst clicks
             for _ in range(self.config["BURST_AMOUNT"]):
                 start_click = time.perf_counter()
-                self.do_click()
+                self.do_click(right_click=self.config["IS_RIGHT_CLICK"])
                 if random.randint(0, 100) < self.config["DOUBLE_CLICK_CHANCE"]:
-                    self.do_click()
+                    self.do_click(right_click=self.config["IS_RIGHT_CLICK"])
 
                 cps_this_click = self.current_target_cps
                 delay = 1.0 / cps_this_click

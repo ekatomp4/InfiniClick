@@ -52,7 +52,7 @@ def ask_binding():
         "WHILE_HELD": while_held,
         "CPS": cps,
         "CPS_VARIANCE": variance,
-        "BURST_AMOUNT": burst_amount,
+        "BURST_AMOUNT": max(1, burst_amount),
         "BURST_PAUSE": burst_pause,
         "DOUBLE_CLICK_CHANCE": double_click_chance,
         "JITTER_AMOUNT": jitter_amount,
