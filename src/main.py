@@ -54,8 +54,10 @@ def add_binding(bindings):
     new_binding = ask_binding()
 
     # Overwrite if same toggle key
-    existing_idx = next((i for i, b in enumerate(bindings) 
-                         if b["TOGGLE_INPUT"].lower() == new_binding["TOGGLE_INPUT"].lower()), None)
+    existing_idx = next(
+        (i for i, b in enumerate(bindings) if b["TOGGLE_INPUT"].lower() == new_binding["TOGGLE_INPUT"].lower()), 
+        None
+    )
     if existing_idx is not None:
         old = bindings[existing_idx]
         bindings[existing_idx] = new_binding
@@ -65,6 +67,7 @@ def add_binding(bindings):
         print(f"✅ Added new binding on [{new_binding['TOGGLE_INPUT']}]")
 
     save_config(bindings)  # auto-save
+    return bindings         # return updated bindings
 
 def remove_binding(bindings):
     for i, b in enumerate(bindings):
@@ -95,10 +98,12 @@ def show_bindings(bindings):
         return
     print("\n=== Current Bindings ===")
     for i, b in enumerate(bindings, start=1):
-        print(f"{i}. Toggle: {b['TOGGLE_INPUT']}, While Held: {b['WHILE_HELD']}, "
-              f"CPS: {b['CPS']}±{b['CPS_VARIANCE']}, Burst: {b['BURST_AMOUNT']}, "
-              f"Double Click Chance: {b['DOUBLE_CLICK_CHANCE']}%, Jitter: {b['JITTER_AMOUNT']}, "
-              f"Right Click: {b['IS_RIGHT_CLICK']}, Block Hitting: {b['IS_BLOCK_HITTING']}")
+        print(
+            f"{i}. Toggle: {b['TOGGLE_INPUT']}, While Held: {b['WHILE_HELD']}, "
+            f"CPS: {b['CPS']}±{b['CPS_VARIANCE']}, Burst: {b['BURST_AMOUNT']}, "
+            f"Double Click Chance: {b['DOUBLE_CLICK_CHANCE']}%, Jitter: {b['JITTER_AMOUNT']}, "
+            f"Right Click: {b['IS_RIGHT_CLICK']}, Block Hitting: {b['IS_BLOCK_HITTING']}"
+        )
 
 # ==============================
 # Main Menu
@@ -108,9 +113,9 @@ def main():
 
     while True:
         print("\n\033[92m=== AutoClicker Config Menu ===\033[0m")
-        print("\033[94m1. \033[0mAdd new binding")
-        print("\033[94m2. \033[0mRemove binding")
-        print("\033[94m3. \033[0mStart clicker")
+        print("\033[94m1. \033[0mStart clicker")
+        print("\033[94m2. \033[0mAdd new binding")
+        print("\033[94m3. \033[0mRemove binding")
         print("\033[94m4. \033[0mReset config")
         print("\033[94m5. \033[0mShow all bindings")
         print("\033[91m6. \033[0mExit")
@@ -119,12 +124,12 @@ def main():
         choice = input("Choose option: ").strip()
 
         if choice == "1":
-            add_binding(bindings)
-        elif choice == "2":
-            remove_binding(bindings)
-        elif choice == "3":
             print("🚀 Starting clicker...")
             setup_inputs(bindings)
+        elif choice == "2":
+            bindings = add_binding(bindings)  # refresh with updated bindings
+        elif choice == "3":
+            remove_binding(bindings)
         elif choice == "4":
             new_cfg = reset_config()
             if new_cfg:
